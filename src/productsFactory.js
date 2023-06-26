@@ -3,8 +3,8 @@ class ProductsFactory {
     this.productsType = {
       "Medium Coverage": (product)=> this.mediumCoverageFactory(product),
       "Full Coverage": (product) => this.fullCoverageFactory(product),
-      "Low Coverage":"LOW_COVERAGE",
-      "Mega Coverage": "x",
+      "Low Coverage": (product) => this.lowCoverageFactory(product),
+      "Mega Coverage": (product) =>  this.megaCoverageFactory(product),
       "Special Full Coverage":"SPECIAL_FULL_COVERAGE",
       "Super Sale":"SUPER_SALE"
     }
@@ -45,6 +45,31 @@ class ProductsFactory {
       if(newProduct.price < 50){
         newProduct.price  = newProduct.price + 1
       }
+    }
+
+    return newProduct
+  }
+
+  lowCoverageFactory(product){
+    let newProduct =  product;
+
+    if(  newProduct.price > 0 ){
+      newProduct.price  = newProduct.price - 1
+    }
+    newProduct.sellIn  = newProduct.sellIn - 1
+
+    if(newProduct.sellIn < 0 && newProduct.price > 0){
+      newProduct.price  = newProduct.price - 1
+    }
+
+    return newProduct
+  }
+
+  megaCoverageFactory(product){
+    let newProduct =  product;
+
+    if(newProduct.price < 50){
+      newProduct.price  = newProduct.price + 1
     }
 
     return newProduct

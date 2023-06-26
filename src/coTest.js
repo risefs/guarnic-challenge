@@ -15,7 +15,8 @@ class CarInsurance {
   }
   updatePrice() {
     for (var i = 0; i < this.products.length; i++) {
-      const productToProccess = new ProductsFactory().productsType[this.products[i].name]
+      const productName = this.products[i].name;
+      const productToProccess = new ProductsFactory().productsType[productName]
       const productUpdated = productToProccess(this.products[i])
       this.products[i] = productUpdated
     }
