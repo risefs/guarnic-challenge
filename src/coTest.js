@@ -1,4 +1,7 @@
+const { ProductsFactory } = require("./productsFactory");
+
 class Product {
+  //NOTE: It's forbidden to modify
   constructor(name, sellIn, price) {
     this.name = name;
     this.sellIn = sellIn;
@@ -12,6 +15,16 @@ class CarInsurance {
   }
   updatePrice() {
     for (var i = 0; i < this.products.length; i++) {
+      const productToProccess = new ProductsFactory().productsType[this.products[i].name]
+      const productUpdated = productToProccess(this.products[i])
+      this.products[i] = productUpdated
+    }
+
+    return this.products;
+  }
+  updatePrice2() {
+    for (var i = 0; i < this.products.length; i++) {
+
       if (this.products[i].name != 'Full Coverage' && this.products[i].name != 'Special Full Coverage') {
         if (this.products[i].price > 0) {
           if (this.products[i].name != 'Mega Coverage') {
@@ -60,6 +73,8 @@ class CarInsurance {
     return this.products;
   }
 }
+
+
 
 module.exports = {
   Product,

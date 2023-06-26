@@ -1,9 +1,8 @@
 class ProductsFactory {
-  constructor(product = {}) {
-    this.product = product;
+  constructor() {
     this.productsType = {
-      "Medium Coverage": this.mediumCoverageFactory(),
-      "Full Coverage": "x",
+      "Medium Coverage": (product)=> this.mediumCoverageFactory(product),
+      "Full Coverage": (product) => this.fullCoverageFactory(product),
       "Low Coverage":"LOW_COVERAGE",
       "Mega Coverage": "x",
       "Special Full Coverage":"SPECIAL_FULL_COVERAGE",
@@ -14,46 +13,43 @@ class ProductsFactory {
 
   applyFactory(){
     const productName = this.product.name
-    return this.productsType[productName]
-  }
-
-  mediumCoverageFactory(){
-    console.info("*** mediumCoverageFactory ***")
-    const {  price } = this.product;
-
-    if(  price > 0 ){
-      this.product.price  = this.product.price - 1
+    if( productName && this.productsType.hasOwnProperty(productName) ){
+      return this.productsType[productName]
     }
-    this.product.sellIn  = this.product.sellIn - 1
-
-    if(this.product.sellIn < 0 && this.product.price > 0){
-      this.product.price  = this.product.price - 1
-    }
-
     return this.product
   }
 
-  fullCoverageFactory(){
-    console.info("*** fullCoverageFactory ***");
-    const { price } = this.product;
-
-    if(price < 50){
-      this.product.price  = this.product.price + 1
+  mediumCoverageFactory(product){
+    let newProduct =  product;
+    if(  newProduct.price > 0 ){
+      newProduct.price  = newProduct.price - 1
     }
-    this.product.sellIn  = this.product.sellIn - 1
+    newProduct.sellIn  = newProduct.sellIn - 1
 
-    if(this.product.sellIn < 0){
-      if(this.product.price < 50){
-        this.product.price  = this.product.price + 1
+    if(newProduct.sellIn < 0 && newProduct.price > 0){
+      newProduct.price  = newProduct.price - 1
+    }
+
+    return newProduct
+  }
+
+  fullCoverageFactory(product){
+    let newProduct =  product;
+
+    if(newProduct.price < 50){
+      newProduct.price  = newProduct.price + 1
+    }
+    newProduct.sellIn  = newProduct.sellIn - 1
+
+    if(newProduct.sellIn < 0){
+      if(newProduct.price < 50){
+        newProduct.price  = newProduct.price + 1
       }
     }
 
-    return this.product
+    return newProduct
   }
 
-  megaCoverageFactory(){
-    console.info("*** megaCoverageFactory ***")
-  }
 
 }
 
