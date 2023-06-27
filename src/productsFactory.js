@@ -11,14 +11,6 @@ class ProductsFactory {
   }
 
 
-  applyFactory(){
-    const productName = this.product.name
-    if( productName && this.productsType.hasOwnProperty(productName) ){
-      return this.productsType[productName]
-    }
-    return this.product
-  }
-
   mediumCoverageFactory(product){
     let newProduct =  product;
     if(  newProduct.price > 0 ){
