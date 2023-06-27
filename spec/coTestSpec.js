@@ -156,3 +156,52 @@ describe("ProductsFactory - superSaleFactory", function() {
   });
 
 });
+
+
+describe("Constructor Products Types Methods", function() {
+  let instance;
+  let mediumCoverageFactoryStub;
+  let fullCoverageFactoryStub;
+  let lowCoverageFactoryStub;
+  let megaCoverageFactoryStub;
+  let specialCoverageFactoryStub;
+  let superSaleFactoryStub;
+
+  beforeEach(() => {
+    instance = new ProductsFactory();
+    mediumCoverageFactoryStub = sinon.stub(instance, 'mediumCoverageFactory');
+    fullCoverageFactoryStub = sinon.stub(instance, 'fullCoverageFactory');
+    lowCoverageFactoryStub = sinon.stub(instance, 'lowCoverageFactory');
+    megaCoverageFactoryStub = sinon.stub(instance, 'megaCoverageFactory');
+    specialCoverageFactoryStub = sinon.stub(instance, 'specialCoverageFactory');
+    superSaleFactoryStub = sinon.stub(instance, 'superSaleFactory');
+  });
+
+  afterEach(() => {
+    sinon.restore();
+  });
+
+  it("Each method must be called at least once", function() {
+    
+    instance.productsType["Medium Coverage"]({name:"Medium Coverage",price:0,sellIn:0});
+    sinon.assert.calledOnce(mediumCoverageFactoryStub);
+
+    instance.productsType["Full Coverage"]({name:"Full Coverage",price:0,sellIn:0});
+    sinon.assert.calledOnce(fullCoverageFactoryStub);
+
+    instance.productsType["Low Coverage"]({name:"Low Coverage",price:0,sellIn:0});
+    sinon.assert.calledOnce(lowCoverageFactoryStub);
+
+    instance.productsType["Mega Coverage"]({name:"Mega Coverage",price:0,sellIn:0});
+    sinon.assert.calledOnce(megaCoverageFactoryStub);
+
+    instance.productsType["Special Full Coverage"]({name:"Special Full Coverage",price:0,sellIn:0});
+    sinon.assert.calledOnce(specialCoverageFactoryStub);
+
+    instance.productsType["Super Sale"]({name:"Super Sale",price:0,sellIn:0});
+    sinon.assert.calledOnce(superSaleFactoryStub);
+  
+  });
+  
+
+});
