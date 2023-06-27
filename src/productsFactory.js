@@ -103,12 +103,12 @@ class ProductsFactory {
     let newProduct =  product;
 
     if( newProduct.price > 0 ){
-      newProduct.price  = newProduct.price - 1
+      newProduct.price  = newProduct.price - 2
     }
     newProduct.sellIn  = newProduct.sellIn - 1
 
     if(newProduct.sellIn < 0 && newProduct.price > 0){
-      newProduct.price  = newProduct.price - 1
+      newProduct.price  = newProduct.price - 2
     }
     return newProduct
   }
