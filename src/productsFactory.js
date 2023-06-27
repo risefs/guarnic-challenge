@@ -5,7 +5,7 @@ class ProductsFactory {
       "Full Coverage": (product) => this.fullCoverageFactory(product),
       "Low Coverage": (product) => this.lowCoverageFactory(product),
       "Mega Coverage": (product) =>  this.megaCoverageFactory(product),
-      "Special Full Coverage":"SPECIAL_FULL_COVERAGE",
+      "Special Full Coverage": (product)=> this.specialCoverageFactory(product),
       "Super Sale":"SUPER_SALE"
     }
   }
@@ -70,6 +70,30 @@ class ProductsFactory {
 
     if(newProduct.price < 50){
       newProduct.price  = newProduct.price + 1
+    }
+
+    return newProduct
+  }
+
+  specialCoverageFactory(product){
+    let newProduct =  product;
+
+    if(newProduct.price < 50){
+      newProduct.price  = newProduct.price + 1
+
+      if(newProduct.sellIn < 11 && newProduct.price < 50){
+        newProduct.price  = newProduct.price + 1
+      }
+
+      if(newProduct.sellIn < 6 && newProduct.price < 50){
+        newProduct.price  = newProduct.price + 1
+      }
+
+    }
+    newProduct.sellIn  = newProduct.sellIn - 1
+
+    if(newProduct.sellIn < 0){
+      newProduct.price = 0//newProduct.price - newProduct.price;
     }
 
     return newProduct
